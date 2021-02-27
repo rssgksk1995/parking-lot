@@ -1,0 +1,4 @@
+.textStyle{
+  font-size: var(--font-size-heading);
+  font-weight: bold;
+}

@@ -1,3 +1,12 @@
+:root {
+  --font-size-heading: 35px;
+  --font-size-body: 20px;
+  --primary: #f5ad26;
+  --secondary: #ffffffc2;
+  --success: #33f00d;
+  --error: #ff0000;
+}
+
 .App {
   text-align: center;
 }
