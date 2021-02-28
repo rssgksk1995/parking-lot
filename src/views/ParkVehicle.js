@@ -12,7 +12,11 @@ import ModalComp from "../components/ModalComp";
 import VehicleStyle from "./ParkVehicle.module.css";
 import AppHeader from "../components/AppHeader";
 
-import { VEHICLE_TYPE } from "../constant/Common";
+import {
+	CAR_PARKING_LOT_SPACE,
+	BIKE_PARKING_LOT_SPACE,
+	VEHICLE_TYPE
+} from "../constant/Common";
 
 class ParkVehicle extends React.Component {
 	constructor(props) {
@@ -24,6 +28,15 @@ class ParkVehicle extends React.Component {
 			formSubmitted: false,
 			errorMessage: ""
 		};
+	}
+	componentDidMount() {
+		const { carParkingSpace, bikeParkingSpace, dispatch } = this.props;
+		if (!carParkingSpace) {
+			dispatch(actions.initializeCarData.success(CAR_PARKING_LOT_SPACE));
+		}
+		if (!bikeParkingSpace) {
+			dispatch(actions.initializeBikeData.success(BIKE_PARKING_LOT_SPACE));
+		}
 	}
 
 	onVehicleTypeChange = event => {
