@@ -10,9 +10,12 @@ import TextInput from "../components/TextInput";
 import * as actions from "../actions/Actions";
 import ModalComp from "../components/ModalComp";
 import VehicleStyle from "./ParkVehicle.module.css";
-import AppHeader from '../components/AppHeader'
-
-import { VEHICLE_TYPE } from "../constant/Common";
+import AppHeader from "../components/AppHeader";
+import {
+	CAR_PARKING_LOT_SPACE,
+	BIKE_PARKING_LOT_SPACE,
+	VEHICLE_TYPE,
+} from "../constant/Common";
 
 class UnParkVehicle extends React.Component {
 	constructor(props) {
@@ -24,6 +27,15 @@ class UnParkVehicle extends React.Component {
 			notFoundMessage: "",
 			selectedParkingSpaceName: ""
 		};
+	}
+	componentDidMount() {
+		const { carParkingSpace, bikeParkingSpace, dispatch } = this.props;
+		if (!carParkingSpace) {
+			dispatch(actions.initializeCarData.success(CAR_PARKING_LOT_SPACE));
+		}
+		if (!bikeParkingSpace) {
+			dispatch(actions.initializeBikeData.success(BIKE_PARKING_LOT_SPACE));
+		}
 	}
 	onVehicleTypeChange = event => {
 		this.setState({
