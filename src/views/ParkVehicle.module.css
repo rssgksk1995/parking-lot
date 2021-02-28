@@ -1,0 +1,16 @@
+.errorMessageStyle {
+	color: red;
+}
+.logo {
+	width: 30px;
+}
+.header{
+  display: inline-flex;
+}
+.headingText{
+  margin-top: -10px;
+  margin-left: 10px;
+}
+.parkButton{
+  margin-top: 20px;
+}
