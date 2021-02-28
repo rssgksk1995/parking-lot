@@ -4,11 +4,24 @@ import Grid from "@material-ui/core/Grid";
 import HeadingComponent from "../components/HeadingComponent";
 import TextComponent from "../components/TextComponent";
 import PrimaryButton from "../components/PrimaryButton";
+import { Link } from "react-router-dom";
+import * as actions from "../actions/Actions";
+import { connect } from "react-redux";
+
+import {
+	CAR_PARKING_LOT_SPACE,
+	BIKE_PARKING_LOT_SPACE
+} from "../constant/Common";
 
 class LandingPage extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = { message: "Hello!" };
+	componentDidMount() {
+		const { carParkingSpace, bikeParkingSpace, dispatch } = this.props;
+		if (!carParkingSpace) {
+			dispatch(actions.initializeCarData.success(CAR_PARKING_LOT_SPACE));
+		}
+		if (!bikeParkingSpace) {
+			dispatch(actions.initializeBikeData.success(BIKE_PARKING_LOT_SPACE));
+		}
 	}
 
 	render() {
@@ -25,14 +38,26 @@ class LandingPage extends React.Component {
 					</Grid>
 				</Grid>
 				<Grid item xs={12} className={LandingStyles.parkingButton}>
-					<PrimaryButton text="Park my vehicle" />
+					<Link to="/park-vehicle">
+						<PrimaryButton text="Park my vehicle" />
+					</Link>
 				</Grid>
-				<Grid item xs={12}>
-					<PrimaryButton text="Un park my vehicle" />
+				<Grid item xs={12}  className={LandingStyles.unparkButton}>
+					<Link to="/un-park-vehicle">
+							<PrimaryButton text="Un park my vehicle" />
+					</Link>
 				</Grid>
 			</Grid>
 		);
 	}
 }
 
-export default LandingPage;
+const mapStateToProps = state => {
+	const { parkingLot } = state;
+	return {
+		carParkingSpace: parkingLot.carParkingSpace,
+		bikeParkingSpace: parkingLot.bikeParkingSpace
+	};
+};
+
+export default connect(mapStateToProps)(LandingPage);
