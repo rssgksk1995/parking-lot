@@ -1,13 +1,17 @@
 .logo {
 	width: 35px;
+	position: absolute;
+	bottom: 0px;
 }
-.header{
-  display: inline-flex;
+.headingStyle {
+	position: absolute;
+	bottom: 0px;
+  left: 45px !important;
 }
-.headingText{
-  margin-top: -10px;
-  margin-left: 10px;
+.header {
+	display: inline-flex;
+  position: relative;
 }
-.parkButton{
-  margin-top: 20px;
+.parkButton {
+	margin-top: 20px;
 }
