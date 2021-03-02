@@ -14,7 +14,7 @@ import AppHeader from "../components/AppHeader";
 import {
 	CAR_PARKING_LOT_SPACE,
 	BIKE_PARKING_LOT_SPACE,
-	VEHICLE_TYPE,
+	VEHICLE_TYPE
 } from "../constant/Common";
 
 class UnParkVehicle extends React.Component {
@@ -59,6 +59,7 @@ class UnParkVehicle extends React.Component {
 				carParkingSpace &&
 					carParkingSpace.forEach((element, index) => {
 						if (element.vehicleNumber === vehicleNumber) {
+							console.log("matched element", element);
 							selectedData = element;
 							id = index;
 							this.setState({
@@ -66,17 +67,22 @@ class UnParkVehicle extends React.Component {
 							});
 						}
 					});
-				if (selectedData && id) {
-					selectedData.vehicleNumber = "";
-					selectedData.isFull = false;
+					
+				if (selectedData && id >=0 ) {
+					this.setState(
+						{
+							formSubmitted: true
+						},
+						() => {
+							selectedData.vehicleNumber = "";
+							selectedData.isFull = false;
 
-					carParkingSpace.splice(id, 1, selectedData);
-					this.props.dispatch(
-						actions.initializeCarData.success(carParkingSpace)
+							carParkingSpace.splice(id, 1, selectedData);
+							this.props.dispatch(
+								actions.initializeCarData.success(carParkingSpace)
+							);
+						}
 					);
-					this.setState({
-						formSubmitted: true
-					});
 				} else {
 					this.setState({
 						notFoundMessage: "Vehicle not found, please check your details."
@@ -94,7 +100,7 @@ class UnParkVehicle extends React.Component {
 						}
 					});
 
-				if (selectedData && id) {
+				if (selectedData && id >=0 ) {
 					selectedData.vehicleNumber = "";
 					selectedData.isFull = false;
 

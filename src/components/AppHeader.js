@@ -14,8 +14,8 @@ export default function AppHeader() {
 				<Link to="/">
 					<img src={parking} alt="Home" className='logo' />
 				</Link>
-				<Link to="/" className='headingText'>
-					<HeadingComponent text="Paking Lot" />
+				<Link to="/">
+					<HeadingComponent text="Paking Lot" compStyle='headingStyle'/>
 				</Link>
 			</Grid>
 			<Grid item xs={12}>
